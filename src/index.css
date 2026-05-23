@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap');
+
+:root {
+  --bg-color: #F8FAFC;
+  --board-bg: #FFFFFF;
+  --grid-line: #F1F5F9;
+  --text-main: #0F172A;
+  --text-muted: #64748B;
+  --accent-x: #BE123C;
+  --accent-o: #0F766E;
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --board-size: 480px;
+  --font-family: 'Manrope', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+  font-family: var(--font-family);
+  color: var(--text-main);
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Game Wrapper */
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  max-width: var(--board-size);
+  padding: 20px;
+}
+
+/* Board Container */
+.board {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--board-bg);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+/* Grid Layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  height: 100%;
+}
+
+/* Cells */
+.grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-color);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  overflow: hidden; /* Prevent content from pushing bounds */
+  object-fit: contain; /* Ensure icons fit within cell without resizing it */
+}
+
+.grid-item:hover:not(:has(button:disabled)) {
+  background: #F1F5F9;
+  transform: translateY(-2px);
+}
+
+.grid-item button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16%; /* Increased padding to contain icons within fixed cell size */
+}
+
+.grid-item button:disabled {
+  cursor: default;
+}
+
+/* Icons */
+.x-tile-icon, .o-tile-icon {
+  width: 95%;
+  height: 95%;
+  object-fit: contain; /* Ensure icons fit within button without resizing it */
+}
+
+.x-tile-icon {
+  filter: invert(18%) sepia(88%) saturate(4422%) hue-rotate(338deg) brightness(85%) contrast(100%); /* Matches --accent-x */
+}
+
+.o-tile-icon {
+  scale: 1.05; /* Increased by 5% to keep balanced while staying contained */
+  filter: invert(34%) sepia(48%) saturate(644%) hue-rotate(125deg) brightness(92%) contrast(92%); /* Matches --accent-o */
+}
+
+/* Controls & Status */
+.controls {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.status {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.reset {
+  padding: 12px 32px;
+  border-radius: 100px;
+  border: none;
+  background: #475569;
+  color: white;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(71, 85, 105, 0.2);
+}
+
+.reset:hover {
+  background: #334155;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(71, 85, 105, 0.3);
+}
+
+.reset:active {
+  transform: translateY(0);
+}
+
+/* Score Counter Styling */
+.scores {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 24px 32px;
+  background: var(--board-bg);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.score-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.score-label {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: 'PT Sans Narrow';
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 10px 0px 10px 10px;
+
+}
+
+.score {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1;
+  padding: 10px 10px 10px 0px;
+}
+
+/* Removing the old visual separators */
+.horiz, .board::before, .board::after {
+  display: none;
+}
+/* controls */
+.controls { width:100%; display:flex; justify-content:center; align-items:center; gap:20px; }
+.status { margin:0; font-size:1rem; color:#111; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;}
+.reset { padding:8px 20px; border-radius:6px; border:1px solid #ccc; background:#f6f6f6; cursor:pointer; }
