@@ -2,7 +2,7 @@ FROM node:20-bullseye-slim
 
 WORKDIR /app
 EXPOSE 8080
-RUN apt update && apt upgrade
+RUN apt update && apt upgrade -y
 COPY package*.json .
 RUN npm ci
 COPY . .
